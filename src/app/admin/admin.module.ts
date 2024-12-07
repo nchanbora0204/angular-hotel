@@ -6,7 +6,7 @@ import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ManageRoomsComponent } from './manage-rooms/manage-rooms.component';
 import { ManageBookingsComponent } from './manage-bookings/manage-bookings.component';
-import { ManageUsersComponent } from './manage-users/manage-users.component';
+import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
 
 
 @NgModule({
@@ -15,7 +15,7 @@ import { ManageUsersComponent } from './manage-users/manage-users.component';
     DashboardComponent,
     ManageRoomsComponent,
     ManageBookingsComponent,
-    ManageUsersComponent
+    ManageEmployeeComponent
   ],
   imports: [
     CommonModule,

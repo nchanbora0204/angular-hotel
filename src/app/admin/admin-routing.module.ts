@@ -4,13 +4,14 @@ import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ManageBookingsComponent } from './manage-bookings/manage-bookings.component';
 import { ManageRoomsComponent } from './manage-rooms/manage-rooms.component';
-import { ManageUsersComponent } from './manage-users/manage-users.component';
+import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
+
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'rooms', component: ManageRoomsComponent },
   { path: 'bookings', component: ManageBookingsComponent },
-  { path: 'users', component: ManageUsersComponent },
+  { path: 'employee', component: ManageEmployeeComponent}
 ];
 
 
