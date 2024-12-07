@@ -1,0 +1,120 @@
+html, body {
+  margin: 0;
+  background: #596886;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: "Roboto Mono", monospace;
+}
+
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+form {
+  margin-right: 30px; /* Giữ khoảng cách giữa form và GIF */
+}
+
+input {
+  text-align: center;
+  border-radius: 20px;
+  display: flex;
+  min-height: 50px;
+  min-width: 300px;
+  color: #ffd5af;
+  background: linear-gradient(to right, #ffd5af 50%, #052b4a 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: all 0.5s ease;
+  border-style: solid;
+  border-color: #ffd5af;
+}
+
+input::placeholder {
+  color: #ffd5af;
+}
+
+input:focus {
+  background-color: #ffd5af;
+  color: #052b4a;
+  background-position: left bottom;
+  outline: none;
+}
+
+.field {
+  margin: 20px;
+}
+
+button {
+  font-size: large;
+  padding: 15px 100px 15px;
+  border-radius: 30px;
+  border: 1px solid #ffd5af;
+  background: #052b4a;
+  color: #ffd5af;
+  cursor: pointer;
+  outline: none;
+  transform: scaleX(1);
+  transition: 0.5s all ease;
+}
+
+.loading {
+  padding: 15px 50px 15px;
+  background: #ffd5af;
+  color: #052b4a;
+}
+
+.submit-button {
+  text-align: center;
+  padding-top: 60px;
+}
+
+.spinner {
+  border: 6px solid #052b4a;
+  border-top: 6px solid #596886;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Hình GIF bên phải */
+.login-gif {
+  width: 250px; /* Bạn có thể điều chỉnh kích thước */
+  height: auto;
+  border-radius: 10px;
+  background: none; /* Loại bỏ background */
+}
+
+/* Nút đóng thẳng hàng với form */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 10px;
+  background: #052b4a;
+  color: #ffd5af;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
+
+.close-btn:hover {
+  background: #ffd5af;
+  color: #052b4a;
+}

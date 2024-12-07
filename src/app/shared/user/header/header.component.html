@@ -1,3 +1,4 @@
+
 <section class="head">
   <div class="container flex1">
     <div class="scoial">
@@ -10,8 +11,15 @@
       <img src="assets/image/logo.png" alt="">
     </div>
     <div class="address">
-      <i class="fas fa-map-marker-alt"></i>
-      <span>205 Fida Walinton, Tongo Street Front, USA</span>
+
+
+      <button (click)="toggleLogin()">Đăng nhập</button>
+
+<div *ngIf="isLoginVisible" class="login-overlay">
+  <app-login  (closeLogin)="toggleLogin()"></app-login> 
+</div>
+
+
     </div>
   </div>
 </section>

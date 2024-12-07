@@ -1,1 +1,25 @@
-<p>login works!</p>
+<div class="login-container">
+  <form>
+    <div class="field">
+      <input type="email" name="email" class="input" placeholder="E-mail" />
+    </div>
+
+    <div class="field">
+      <input type="password" name="password" class="input" placeholder="Password" />
+    </div>
+
+    <div class="submit-button">
+      <button id="button" type="button">Login</button>
+    </div>
+  </form>
+  
+  <!-- Nút đóng -->
+  <button class="close-btn" (click)="close()">Đóng</button>
+  
+  <!-- Hình GIF -->
+  <img class="login-gif" src="https://i2.wp.com/lucloi.vn/wp-content/uploads/2022/06/ezgif-4-a05a033ef2.gif?resize=800%2C570&ssl=1" alt="Funny GIF" />
+</div>
+
+<template id="loader">
+  <div class="spinner"></div>
+</template>

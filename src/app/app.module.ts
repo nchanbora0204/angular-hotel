@@ -8,6 +8,7 @@ import { FooterComponent } from './shared/user/footer/footer.component';
 import { LayoutComponent } from './shared/user/layout/layout.component';
 import { RouterModule } from '@angular/router';
 import { UserComponent } from './user/user.component';
+import { UserModule } from "./user/user.module";
 
 @NgModule({
   declarations: [
@@ -20,8 +21,10 @@ import { UserComponent } from './user/user.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule
-  ],
+    RouterModule,
+    UserModule
+],
+exports: [ LayoutComponent ],
   providers: [],
   bootstrap: [AppComponent]
 })
