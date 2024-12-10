@@ -1,0 +1,79 @@
+<main class="settings-main">
+    <h1>Cài Đặt Hệ Thống</h1>
+    <div class="settings-grid">
+        <!-- Personal Info Card -->
+        <div class="settings-card">
+            <div class="settings-header">
+                <span class="material-icons-sharp">person</span>
+                <h2>Thông Tin Cá Nhân</h2>
+            </div>
+            <div class="settings-content">
+                <form id="personal-info-form">
+                    <!-- Avatar -->
+                    <div class="form-group">
+                        <label for="avatar">Ảnh Đại Diện</label>
+                        <div class="avatar-upload">
+                            <input type="file" id="avatar" name="avatar" accept="image/*" onchange="previewImage(event)" required>
+                            <div class="avatar-preview">
+                                <img id="avatar-preview" src="surprised-business-man-sitting-table-blue-studio-wall.jpg" alt="Avatar">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Name -->
+                    <div class="form-group">
+                        <label for="full-name">Tên</label>
+                        <input type="text" id="full-name" name="full-name" placeholder="Nhập tên của bạn" required>
+                    </div>
+
+                    <!-- Age -->
+                    <div class="form-group">
+                        <label for="age">Tuổi</label>
+                        <input type="number" id="age" name="age" placeholder="Nhập tuổi" required>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Nhập email của bạn" required>
+                    </div>
+
+                    <!-- Address -->
+                    <div class="form-group">
+                        <label for="address">Địa Chỉ</label>
+                        <input type="text" id="address" name="address" placeholder="Nhập địa chỉ của bạn" required>
+                    </div>
+
+                    <!-- Gender -->
+                    <div class="form-group">
+                        <label for="gender">Giới Tính</label>
+                        <select id="gender" name="gender" required>
+                            <option value="">Chọn giới tính</option>
+                            <option value="male">Nam</option>
+                            <option value="female">Nữ</option>
+                            <option value="other">Khác</option>
+                        </select>
+                    </div>
+
+                    <!-- Phone Number -->
+                    <div class="form-group">
+                        <label for="phone">Số Điện Thoại</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Nhập số điện thoại của bạn" required>
+                    </div>
+
+                    <!-- Role -->
+                    <div class="form-group">
+                        <label for="role">Vai Trò</label>
+                        <select id="role" name="role" required>
+                            <option value="admin">Quản Trị Viên</option>
+                            <option value="manager">Quản Lý</option>
+                            <option value="employee">Nhân Viên</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="save-btn">Lưu Thông Tin</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>

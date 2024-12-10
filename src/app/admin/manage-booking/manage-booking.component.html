@@ -1,0 +1,93 @@
+<main class="main-content">
+    <main class="main-content">
+        <!-- Biểu đồ trạng thái phòng -->
+        <section class="dashboard">
+            <div class="chart-container">
+                <canvas id="roomStatusChart"></canvas>
+            </div>
+            <div class="summary">
+                <h3>Tóm Tắt Trạng Thái Phòng</h3>
+                <ul>
+                    <li>Phòng trống: <span id="availableRooms">0</span></li>
+                    <li>Phòng đã đặt: <span id="bookedRooms">0</span></li>
+                    <li>Phòng bảo trì: <span id="maintenanceRooms">0</span></li>
+                </ul>
+            </div>
+        </section>
+    
+        <!-- Bảng danh sách đặt phòng -->
+        <section class="booking-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mã Đặt Phòng</th>
+                        <th>Tên Khách Hàng</th>
+                        <th>Ngày Đặt</th>
+                        <th>Ngày Nhận</th>
+                        <th>Ngày Trả</th>
+                        <th>Số Phòng</th>
+                        <th>Loại Phòng</th>
+                        <th>Trạng Thái</th>
+                        <th>Hành Động</th>
+                    </tr>
+                </thead>
+                <tbody id="booking-list">
+                    <tr>
+                        <td>1234</td>
+                        <td>Nguyễn Văn A</td>
+                        <td>2024-12-01</td>
+                        <td>2024-12-05</td>
+                        <td>2024-12-07</td>
+                        <td>101</td>
+                        <td>Phòng Đơn</td>
+                        <td>
+                            <select class="status-dropdown">
+                                <option value="pending">Chờ xử lý</option>
+                                <option value="confirmed">Xác nhận</option>
+                                <option value="cancelled">Đã hủy</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="btn-edit">Sửa</button>
+                            <button class="btn-delete">Xóa</button>
+                        </td>
+                    </tr>
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Dữ liệu trạng thái phòng
+        const roomData = {
+            labels: ['Phòng trống', 'Phòng đã đặt', 'Phòng bảo trì'],
+            datasets: [{
+                data: [10, 5, 3], // Thay thế bằng dữ liệu thực tế
+                backgroundColor: ['#4caf50', '#2196f3', '#f44336']
+            }]
+        };
+    
+        // Tạo biểu đồ Pie Chart
+        const ctx = document.getElementById('roomStatusChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'pie',
+            data: roomData,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    }
+                }
+            }
+        });
+    
+        // Cập nhật tóm tắt trạng thái phòng
+        document.getElementById('availableRooms').textContent = roomData.datasets[0].data[0];
+        document.getElementById('bookedRooms').textContent = roomData.datasets[0].data[1];
+        document.getElementById('maintenanceRooms').textContent = roomData.datasets[0].data[2];
+    </script>
+    
+                    <!-- Thêm các dòng dữ liệu khác -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+    
+            </main>

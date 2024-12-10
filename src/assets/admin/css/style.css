@@ -24,6 +24,7 @@
     --box-shadow: 0 2rem 3rem var(--color-light);
 }
 
+
 *{
     margin: 0;
     padding: 0;
@@ -65,8 +66,7 @@ body {
     --button-text-color: #ffffff;
 }
 
-
-
+    /*Customer start*/
 .customer-main {
     padding: 20px;
 }
@@ -702,7 +702,7 @@ b{
 .warning{
         color: var(--color-warning);
 }
-
+/* aside start */
 aside{
     height: 100vh;
     
@@ -791,6 +791,7 @@ aside .sidebar .message-count{
     font-size: 11px;
     border-radius: var(--border-radius-1);
 }
+/* aside end */
 /* ////////////////////////////////////////////////////////////// */
 
 main{

@@ -1,0 +1,187 @@
+<main class="customer-main">
+    <h1>Quản Lý Khách Hàng</h1>
+    <div class="customer-controls">
+        <!-- Search and Add Customer -->
+        <div class="search-bar">
+            <input type="text" id="search" placeholder="Tìm kiếm khách hàng...">
+            <button class="search-btn">
+                <span class="material-icons-sharp">search</span>
+            </button>
+        </div>
+        <a href="addCustomer.html">
+        <button class="add-btn" id="add-customer-btn">
+            <span class="material-icons-sharp">person_add</span>
+            Thêm Khách Hàng
+        </button>
+        </a>
+    </div>
+
+    <!-- Filter options -->
+    <div class="filter-options">
+        <label for="gender-filter">Giới Tính:</label>
+        <select id="gender-filter">
+            <option value="">Tất cả</option>
+            <option value="male">Nam</option>
+            <option value="female">Nữ</option>
+        </select>
+    
+        <label for="status-filter">Trạng Thái:</label>
+        <select id="status-filter">
+            <option value="">Tất cả</option>
+            <option value="active">Hoạt Động</option>
+            <option value="inactive">Không Hoạt Động</option>
+        </select>
+    
+        <button class="filter-btn">Lọc</button>
+
+        
+    </div>
+    
+    
+
+    <!-- Customer Table -->
+    <div class="customer-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên Khách Hàng</th>
+                    <th>Email</th>
+                    <th>Số Điện Thoại</th>
+                    <th>Giới Tính</th>
+                    <th>Địa Chỉ</th>
+                    <th>Ngày Đăng Ký</th>
+                    <th>Hành Động</th>
+                </tr>
+            </thead>
+            <tbody id="customer-list"></tbody>
+        </table>
+    </div>
+
+    <div class="pagination">
+        <button id="prev-page" class="pagination-btn" disabled>
+            <span class="material-icons-sharp">arrow_back_ios</span>
+            Trang Trước
+        </button>
+        <span class="page-info" id="page-info">Trang 1</span>
+        <button id="next-page" class="pagination-btn">
+            Trang Sau
+            <span class="material-icons-sharp">arrow_forward_ios</span>
+        </button>
+    </div>
+    
+    <script>
+        const customerList = document.getElementById('customer-list');
+        const prevPageBtn = document.getElementById('prev-page');
+        const nextPageBtn = document.getElementById('next-page');
+        const genderFilter = document.getElementById('gender-filter');
+        const statusFilter = document.getElementById('status-filter');
+        const filterBtn = document.querySelector('.filter-btn');
+    
+        let currentPage = 1;
+        const itemsPerPage = 5;
+    
+        // Lấy danh sách khách hàng từ LocalStorage
+        let customers = JSON.parse(localStorage.getItem('customers')) || [];
+    
+        // Hàm hiển thị danh sách khách hàng theo trang và bộ lọc
+        function displayCustomers() {
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = currentPage * itemsPerPage;
+    
+            // Lọc khách hàng theo giới tính và trạng thái
+            const filteredCustomers = customers.filter(customer => {
+                const genderMatch = genderFilter.value ? customer.gender === genderFilter.value : true;
+                const statusMatch = statusFilter.value ? customer.status === statusFilter.value : true;
+                return genderMatch && statusMatch;
+            });
+    
+            // Lấy các khách hàng cần hiển thị cho trang hiện tại
+            const paginatedCustomers = filteredCustomers.slice(start, end);
+    
+            // Clear danh sách khách hàng hiện tại
+            customerList.innerHTML = '';
+    
+            // Hiển thị danh sách khách hàng
+            paginatedCustomers.forEach((customer, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${start + index + 1}</td>
+                    <td>${customer.name}</td>
+                    <td>${customer.email}</td>
+                    <td>${customer.phone}</td>
+                    <td>${customer.gender}</td>
+                    <td>${customer.address}</td>
+                    <td>${customer.registrationDate}</td>
+                    <td>
+                        <button class="edit-btn" onclick="editCustomer(${start + index})">Sửa</button>
+                        <button class="delete-btn" onclick="deleteCustomer(${start + index})">Xóa</button>
+                    </td>
+                `;
+                customerList.appendChild(row);
+            });
+    
+            // Cập nhật trạng thái các nút phân trang
+            prevPageBtn.disabled = currentPage === 1;
+            nextPageBtn.disabled = currentPage * itemsPerPage >= filteredCustomers.length;
+        }
+    
+        // Sự kiện khi nhấn nút "Trang Sau"
+        nextPageBtn.addEventListener('click', () => {
+            if (currentPage * itemsPerPage < customers.length) {
+                currentPage++;
+                displayCustomers();
+            }
+        });
+    
+        // Sự kiện khi nhấn nút "Trang Trước"
+        prevPageBtn.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                displayCustomers();
+            }
+        });
+    
+        // Sự kiện khi nhấn nút "Lọc"
+        filterBtn.addEventListener('click', () => {
+            currentPage = 1;  // Reset về trang đầu tiên khi lọc
+            displayCustomers();
+        });
+    
+        // Hàm xóa khách hàng
+        function deleteCustomer(index) {
+            customers.splice(index, 1);
+            localStorage.setItem('customers', JSON.stringify(customers));
+            displayCustomers(); // Cập nhật lại danh sách sau khi xóa
+        }
+    
+        // Hàm sửa thông tin khách hàng
+        function editCustomer(index) {
+            const customer = customers[index];
+            const updatedName = prompt("Cập nhật tên khách hàng:", customer.name);
+            const updatedEmail = prompt("Cập nhật email:", customer.email);
+            const updatedPhone = prompt("Cập nhật số điện thoại:", customer.phone);
+            const updatedGender = prompt("Cập nhật giới tính:", customer.gender);
+            const updatedAddress = prompt("Cập nhật địa chỉ:", customer.address);
+            const updatedRegistrationDate = prompt("Cập nhật ngày đăng ký:", customer.registrationDate);
+    
+            if (updatedName && updatedEmail && updatedPhone && updatedGender && updatedAddress && updatedRegistrationDate) {
+                customers[index] = {
+                    name: updatedName,
+                    email: updatedEmail,
+                    phone: updatedPhone,
+                    gender: updatedGender,
+                    address: updatedAddress,
+                    registrationDate: updatedRegistrationDate
+                };
+                localStorage.setItem('customers', JSON.stringify(customers));
+                displayCustomers(); // Cập nhật lại danh sách sau khi sửa
+            }
+        }
+    
+        // Hiển thị khách hàng khi tải trang
+        displayCustomers();
+    </script>
+    
+    
+</main>

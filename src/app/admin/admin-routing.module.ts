@@ -1,22 +1,29 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminComponent } from './admin.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { ManageBookingsComponent } from './manage-bookings/manage-bookings.component';
-import { ManageRoomsComponent } from './manage-rooms/manage-rooms.component';
 import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
-
+import { SettingComponent } from './setting/setting.component';
+import { AdminLayoutComponent } from '../shared/admin/admin-layout/admin-layout.component';
+import { ManageCustomerComponent } from './manage-customer/manage-customer.component';
+import { ManageBookingComponent } from './manage-booking/manage-booking.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent },
-  { path: 'rooms', component: ManageRoomsComponent },
-  { path: 'bookings', component: ManageBookingsComponent },
-  { path: 'employee', component: ManageEmployeeComponent}
+  {
+    path: '',
+    component: AdminLayoutComponent,
+    children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+      { path: 'dashboard', component: DashboardComponent},
+      { path: 'bookingmagage', component: ManageBookingComponent},
+      { path: 'customer', component: ManageCustomerComponent },
+      { path: 'employee', component: ManageEmployeeComponent },
+      { path: 'setting', component: SettingComponent },
+    ],
+  },
 ];
-
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {}

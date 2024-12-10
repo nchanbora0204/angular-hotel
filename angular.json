@@ -35,12 +35,8 @@
               "src/assets"
             ],
             "styles": [
-              
-              "src/assets/css/style.css"
             ],
             "scripts": [
-              "src/assets/js/jquery.countdown.js",
-              "src/assets/js/jquery.countdown.min.js"
             ]
           },
           "configurations": {

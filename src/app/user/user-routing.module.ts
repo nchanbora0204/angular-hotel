@@ -7,7 +7,7 @@ import { LayoutComponent } from '../shared/user/layout/layout.component';
 import { AboutComponent } from './about/about.component';
 import { BookingComponent } from './booking/booking.component';
 import { ContactComponent } from './contact/contact.component';
-import { RoomDetailComponent } from './room-detail/room-detail.component';
+
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
@@ -20,7 +20,6 @@ const routes: Routes = [
         { path: 'booking', component: BookingComponent},
         { path: 'contact', component: ContactComponent},
         { path: 'rooms', component: RoomListComponent},
-        { path: 'room-detail', component: RoomDetailComponent}
       ],   
     },
     {
