@@ -6,18 +6,27 @@
       <i class="fab fa-twitter"></i>
       <i class="fab fa-instagram"></i>
       <i class="fab fa-youtube"></i>
+    
     </div>
     <div class="logo">
       <img src="assets/image/logo.png" alt="">
     </div>
     <div class="address">
 
-
-      <button (click)="toggleLogin()">Đăng nhập</button>
-
+     
+      <button *ngIf="!isLoggedIn" (click)="toggleLogin()">Đăng nhập</button>
+      <button *ngIf="!isLoggedIn"  (click)="toggleRegister()">Đăng ký</button>
+      <button  *ngIf="isLoggedIn" (click)="logout()" >Đăng xuất</button>
+     
 <div *ngIf="isLoginVisible" class="login-overlay">
   <app-login  (closeLogin)="toggleLogin()"></app-login> 
+
 </div>
+<div *ngIf="isRegisterVisible" class="login-overlay">
+  <app-register  (closeRegister)="toggleRegister()"></app-register> 
+
+</div>
+
 
 
     </div>
@@ -36,6 +45,7 @@
           <li> <a href="/user/rooms">Room</a> </li>
           <li> <a href="/user/booking">Booking</a> </li>
           <li> <a href="/user/contact">contact</a> </li>
+          <li *ngIf="user"> Xin chào {{user.name}}  </li>
         </ul>
         <div class="hamburger">
           <span class="bar"></span>

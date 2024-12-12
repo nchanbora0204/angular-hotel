@@ -10,6 +10,11 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { BookingComponent } from './booking/booking.component';
 import { LoginComponent } from './login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { httpInterceptor } from '../core/interceptor/http.interceptor';
+import { BrowserModule } from '@angular/platform-browser';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -21,13 +26,22 @@ import { LoginComponent } from './login/login.component';
     AboutComponent,
     ContactComponent,
     BookingComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
+  ],
+
+  providers: [
+    provideHttpClient(withInterceptors([httpInterceptor]))
   ],
   imports: [
+   
+    HttpClientModule,
+    ReactiveFormsModule,
     CommonModule,
     UserRoutingModule
   ],
   exports: [ 
+    RegisterComponent,
     LoginComponent
   ]
 })

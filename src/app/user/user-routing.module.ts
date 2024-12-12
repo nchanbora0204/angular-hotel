@@ -9,6 +9,7 @@ import { BookingComponent } from './booking/booking.component';
 import { ContactComponent } from './contact/contact.component';
 import { RoomDetailComponent } from './room-detail/room-detail.component';
 import { LoginComponent } from './login/login.component';
+import { gustGuard } from '../core/guards/gust.guard';
 
 const routes: Routes = [
     {
@@ -25,7 +26,8 @@ const routes: Routes = [
     },
     {
       path: 'login', 
-      component: LoginComponent
+      component: LoginComponent,
+      canActivate: [gustGuard]
     }
 ];
 

@@ -1,15 +1,15 @@
 <div class="login-container">
-  <form>
+  <form [formGroup]="form" (submit)="onSubmit()">
     <div class="field">
-      <input type="email" name="email" class="input" placeholder="E-mail" />
+      <input  type="email" name="email" class="form-control" formControlName="email" placeholder="E-mail" />
     </div>
 
     <div class="field">
-      <input type="password" name="password" class="input" placeholder="Password" />
+      <input type="password" name="password" class="form-control" formControlName="password" placeholder="Password" />
     </div>
 
     <div class="submit-button">
-      <button id="button" type="button">Login</button>
+      <button id="button" class="submit" type="submit" [disabled]="form.invalid">Login</button>
     </div>
   </form>
   
