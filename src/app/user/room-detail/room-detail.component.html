@@ -1,87 +1,106 @@
-<section class="room-details top">
-    <div class="container">
-      <div class="content flex">
-        <!-- Room Images -->
-        <div class="left">
-          <div class="owl-carousel room-gallery">
-            <div class="item">
-              <img src="assets/image/o1.jpg" alt="Deluxe Room">
-            </div>
-            <div class="item">
-              <img src="assets/image/o2.jpg" alt="Deluxe Room">
-            </div>
-            <div class="item">
-              <img src="assets/image/o3.jpg" alt="Deluxe Room">
-            </div>
-          </div>
-        </div>
+<section class="room wrapper2 top" id="room">
+  <div class="container">
+    <div class="heading">
+      <h5>PHÒNG CỦA CHÚNG TÔI</h5>
+      <h2>{{ room?.roomname }}</h2>
+    </div>
 
-        <!-- Room Information -->
-        <div class="right">
-          <h2>Deluxe Room</h2>
-          <div class="rate flex">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </div>
-          <div class="price">
-            <h3>From $50.6/night</h3>
-          </div>
+    <div *ngIf="loading">Loading room details...</div>
+    <div *ngIf="error" class="error">{{ error }}</div>
 
-          <div class="room-features">
-            <h4>Room Features</h4>
-            <ul>
-              <li><i class="fas fa-check"></i> King-sized Bed</li>
-              <li><i class="fas fa-check"></i> City View</li>
-              <li><i class="fas fa-check"></i> Private Bathroom</li>
-              <li><i class="fas fa-check"></i> Free Wi-Fi</li>
-              <li><i class="fas fa-check"></i> Air Conditioning</li>
-              <li><i class="fas fa-check"></i> Mini Bar</li>
-            </ul>
-          </div>
+    <div *ngIf="!loading && !error" class="content grid mtop">
+      <div class="room-box">
+        <img [src]="room?.image" [alt]="room?.roomname" />
+        <div class="details">
+          <h3>{{ room?.roomname }}</h3>
+          <p>{{ room?.description }}</p>
+          <p><strong>Giá:</strong> ${{ room?.price }}/đêm</p>
+          <p><strong>Sức chứa:</strong> {{ room?.capacity }} người</p>
+          <p><strong>Trạng thái:</strong> {{ room?.isBooked ? 'Đã đặt' : 'Còn trống' }}</p>
 
-          <div class="description">
-            <h4>Room Description</h4>
-            <p>Our Deluxe Room offers a perfect blend of comfort and luxury. Featuring a spacious king-sized bed, modern amenities, and a stunning city view, this room is designed to provide you with an unforgettable stay.</p>
-          </div>
-
-          <div class="room-actions">
-            <a href="booking.html" class="flex1">
-              <span>Book Now</span>
-              <i class="fas fa-arrow-circle-right"></i>
-            </a>
-          </div>
+          <button (click)="fillBookingForm()" class="btn" [class.disabled]="room?.isBooked">Đặt Ngay</button>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Additional Room Information -->
-  <section class="room-additional-info top">
-    <div class="container">
-      <div class="content grid">
-        <div class="box">
-          <i class="fas fa-bed"></i>
-          <h3>Bed Type</h3>
-          <p>King-sized Bed (180 x 200 cm)</p>
-        </div>
-        <div class="box">
-          <i class="fas fa-users"></i>
-          <h3>Occupancy</h3>
-          <p>Max 2 Adults, 1 Child</p>
-        </div>
-        <div class="box">
-          <i class="fas fa-ruler-combined"></i>
-          <h3>Room Size</h3>
-          <p>35 m² / 376 sq ft</p>
-        </div>
-        <div class="box">
-          <i class="fas fa-restroom"></i>
-          <h3>Bathroom</h3>
-          <p>Private Marble Bathroom</p>
-        </div>
-      </div>
+<!-- Form booking sẽ được hiển thị ở dưới -->
+<section class="booking top" id="booking">
+  <div class="container">
+    <div class="heading">
+      <h5>BOOK A ROOM</h5>
+      <h2>Complete Your Reservation</h2>
+      <p>Fill in the form below to secure your booking at our luxurious hotel.</p>
     </div>
-  </section>
+
+    <form [formGroup]="bookingForm" class="booking-form grid" (ngSubmit)="onSubmit()">
+      <!-- Full Name -->
+      <div class="form-group">
+        <label><i class="fas fa-user"></i> Full Name</label>
+        <input type="text" formControlName="fullName" placeholder="Enter your full name" required />
+      </div>
+
+      <!-- Email Address -->
+      <div class="form-group">
+        <label><i class="fas fa-envelope"></i> Email Address</label>
+        <input type="email" formControlName="email" placeholder="Enter your email" required />
+      </div>
+
+      <!-- Phone Number -->
+      <div class="form-group">
+        <label><i class="fas fa-phone"></i> Phone Number</label>
+        <input type="tel" formControlName="phoneNumber" placeholder="Enter your phone number" required />
+      </div>
+
+      <!-- Room Type -->
+      <div class="form-group">
+        <label><i class="fas fa-bed"></i> Room Type</label>
+        <input type="text" formControlName="roomType" [value]="room?.roomname"  />
+      </div>
+
+      <!-- Check-In Date -->
+      <div class="form-group">
+        <label><i class="fas fa-calendar-check"></i> Check-In Date</label>
+        <input type="date" formControlName="checkInDate" required />
+      </div>
+
+      <!-- Check-Out Date -->
+      <div class="form-group">
+        <label><i class="fas fa-calendar-times"></i> Check-Out Date</label>
+        <input type="date" formControlName="checkOutDate" required />
+      </div>
+
+      <!-- Number of Adults -->
+      <div class="form-group">
+        <label><i class="fas fa-user-friends"></i> Number of Adults</label>
+        <input type="number" formControlName="adults" min="1" max="4" required />
+      </div>
+
+      <!-- Number of Children -->
+      <div class="form-group">
+        <label><i class="fas fa-child"></i> Number of Children</label>
+        <input type="number" formControlName="children" min="0" max="3" required />
+      </div>
+
+      <!-- Special Requests -->
+      <div class="form-group full-width">
+        <label><i class="fas fa-comments"></i> Special Requests</label>
+        <textarea formControlName="specialRequests" placeholder="Any special requests or additional information"></textarea>
+      </div>
+
+      <!-- CAPTCHA -->
+      <div class="form-group">
+        <label>{{ captchaQuestion }}</label>
+        <input type="number" formControlName="captcha" placeholder="Your answer" required />
+      </div>
+      <!-- Submit Button -->
+      <div class="form-group full-width">
+        <button type="submit" class="flex1" [disabled]="!bookingForm.valid || !validateCaptcha()">
+          <span>Book Now</span>
+          <i class="fas fa-arrow-circle-right"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

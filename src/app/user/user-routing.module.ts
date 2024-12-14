@@ -20,8 +20,12 @@ const routes: Routes = [
         { path: 'about', component: AboutComponent},
         { path: 'booking', component: BookingComponent},
         { path: 'contact', component: ContactComponent},
-        { path: 'rooms', component: RoomListComponent},
-        { path: 'room-detail', component: RoomDetailComponent}
+        { path: 'rooms', component: RoomListComponent,
+          
+        },
+        { path: 'rooms/room-detail/:id', component: RoomDetailComponent}
+       
+        
       ],   
     },
     {

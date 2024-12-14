@@ -1,90 +1,23 @@
 <section class="room wrapper2 top" id="room">
-  <div class="container">
+    <div class="container">
       <div class="heading">
-          <h5>PHÒNG CỦA CHÚNG TÔI</h5>
-          <h2>Những căn phòng & suite hấp dẫn</h2>
+        <h5>PHÒNG CỦA CHÚNG TÔI</h5>
+        <h2>Những căn phòng & suite hấp dẫn</h2>
       </div>
-      <div class="content grid mtop">
-          <!-- Room 1 -->
-          <div class="room-box">
-              <img src="assets/image/room1.jpg" alt="Phòng Deluxe">
-              <div class="details">
-                  <h3>Phòng Deluxe</h3>
-                  <p>Trải nghiệm kỳ nghỉ tuyệt vời trong phòng Deluxe với các tiện nghi hiện đại và không gian thoải mái.</p>
-                  <p><strong>Giá:</strong> $100/đêm</p>
-                  <a href="#" class="btn">Đặt Ngay</a>
-              </div>
+      <div *ngIf="loading">Loading rooms...</div>
+      <div *ngIf="error" class="error">{{ error }}</div>
+      <div *ngIf="!loading && !error" class="content grid mtop">
+        <div *ngFor="let room of rooms" class="room-box">
+          <img [src]="room.image" [alt]="room.roomname" />
+          <div class="details">
+            <h3>{{ room.roomname }}</h3>
+            <p>{{ room.description }}</p>
+            <p><strong>Giá:</strong> ${{ room.price }}/đêm</p>
+            <!-- Thêm routerLink để chuyển đến chi tiết phòng -->
+            <a [routerLink]="['room-detail', room._id]" class="btn" [class.disabled]="room.isBooked">Đặt Ngay</a>
           </div>
-          <!-- Room 2 -->
-          <div class="room-box">
-              <img src="assets/image/room2.jpg" alt="Phòng Suite">
-              <div class="details">
-                  <h3>Phòng Suite</h3>
-                  <p>Tận hưởng sự sang trọng trong phòng Suite, lý tưởng cho gia đình hoặc kỳ nghỉ dài ngày.</p>
-                  <p><strong>Giá:</strong> $150/đêm</p>
-                  <a href="#" class="btn">Đặt Ngay</a>
-              </div>
-          </div>
-          <!-- Room 3 -->
-          <div class="room-box">
-              <img src="assets/image/room3.jpg" alt="Phòng Đơn">
-              <div class="details">
-                  <h3>Phòng Đơn</h3>
-                  <p>Lựa chọn lý tưởng cho những khách đi một mình, mang lại sự thoải mái và riêng tư.</p>
-                  <p><strong>Giá:</strong> $80/đêm</p>
-                  <a href="#" class="btn">Đặt Ngay</a>
-              </div>
-          </div>
-          <!-- Room 4 -->
-          <div class="room-box">
-              <img src="assets/image/room4.jpg" alt="Phòng Gia Đình">
-              <div class="details">
-                  <h3>Phòng Gia Đình</h3>
-                  <p>Rộng rãi và ấm cúng, phòng Gia Đình hoàn hảo cho cả gia đình bạn.</p>
-                  <p><strong>Giá:</strong> $200/đêm</p>
-                  <a href="#" class="btn">Đặt Ngay</a>
-              </div>
-          </div>
-          <!-- Room 5 -->
-          <div class="room-box">
-              <img src="assets/image/room5.jpg" alt="Suite Điều Hành">
-              <div class="details">
-                  <h3>Suite Điều Hành</h3>
-                  <p>Được thiết kế cho các nhà điều hành, phòng suite này cung cấp tiện nghi cao cấp cho công việc và thư giãn.</p>
-                  <p><strong>Giá:</strong> $250/đêm</p>
-                  <a href="#" class="btn">Đặt Ngay</a>
-              </div>
-          </div>
-          <!-- Room 6 -->
-          <div class="room-box">
-              <img src="assets/image/room6.jpg" alt="Penthouse">
-              <div class="details">
-                  <h3>Penthouse</h3>
-                  <p>Sống cuộc sống thượng lưu trong Penthouse sang trọng với tầm nhìn toàn cảnh thành phố.</p>
-                  <p><strong>Giá:</strong> $500/đêm</p>
-                  <a href="#" class="btn">Đặt Ngay</a>
-              </div>
-          </div>
-          <!-- Room 7 -->
-          <div class="room-box">
-              <img src="assets/image/room7.jpg" alt="Phòng Tiêu Chuẩn">
-              <div class="details">
-                  <h3>Phòng Tiêu Chuẩn</h3>
-                  <p>Sự lựa chọn kinh tế nhưng vẫn mang lại sự thoải mái và tiện nghi.</p>
-                  <p><strong>Giá:</strong> $70/đêm</p>
-                  <a href="#" class="btn">Đặt Ngay</a>
-              </div>
-          </div>
-          <!-- Room 8 -->
-          <div class="room-box">
-              <img src="assets/image/room8.jpg" alt="Biệt Thự Sang Trọng">
-              <div class="details">
-                  <h3>Biệt Thự Sang Trọng</h3>
-                  <p>Biệt thự mang lại sự riêng tư tuyệt đối và sự xa hoa cho kỳ nghỉ của bạn.</p>
-                  <p><strong>Giá:</strong> $600/đêm</p>
-                  <a href="#" class="btn">Đặt Ngay</a>
-              </div>
-          </div>
+        </div>
       </div>
-  </div>
-</section>
+    </div>
+  </section>
+  
